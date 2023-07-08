@@ -1,11 +1,11 @@
 import { Body, Header } from "./components/layout";
-import { WeatherCard } from "./components/weather_card";
+import { WeatherSection } from "./components/weather_section";
 
 function App() {
   return (
     <Body>
       <Header />
-      <WeatherCard />
+      <WeatherSection />
     </Body>
   );
 }

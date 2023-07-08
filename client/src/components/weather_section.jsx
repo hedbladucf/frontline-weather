@@ -1,0 +1,63 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Box, Input, Button, Flex, useToast } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { getWeather } from "../utils/getWeather";
+import { WeatherCard, WeatherCardContent } from "./weather_card";
+
+const locationKey = "location";
+
+export const WeatherSection = () => {
+  const [weather, setWeather] = useState(undefined);
+
+  const [location, setLocation] = useState(
+    localStorage.getItem(locationKey) ?? "Orlando"
+  );
+
+  const toast = useToast();
+
+  useEffect(() => {
+    onSearch();
+  }, []);
+
+  const onSearch = async () => {
+    if (location.length < 2) return;
+    const weather = await getWeather(location);
+
+    if (weather.error) {
+      return toast({
+        description: weather.error,
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+
+    setWeather(weather);
+    localStorage.setItem(locationKey, location);
+  };
+
+  const onInputChanged = (e) => setLocation(e.target.value);
+
+  return (
+    <Box>
+      <WeatherCard>
+        <Flex>
+          <Input
+            value={location}
+            fontWeight="bold"
+            focusBorderColor="white"
+            onChange={onInputChanged}
+            placeholder="Enter a location"
+            _placeholder={{ color: "inherit" }}
+          />
+
+          <Button ml="2" colorScheme="blue" onClick={onSearch}>
+            Search
+          </Button>
+        </Flex>
+      </WeatherCard>
+
+      {weather && <WeatherCardContent info={weather} />}
+    </Box>
+  );
+};
