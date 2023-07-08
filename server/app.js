@@ -41,7 +41,7 @@ app.get("/forecast", async (req, res) => {
   }
 
   // Send weather to client
-  res.json({ weather });
+  res.json(weather);
 });
 
 // For all other paths, respond with not found

@@ -6,7 +6,7 @@ const forcast = async (geoCodeRes) => {
     location: { lat, lon },
   } = geoCodeRes;
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.OPENWEATHER_KEY}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.OPENWEATHER_KEY}&units=imperial`;
 
   try {
     const res = await axios.get(url);
