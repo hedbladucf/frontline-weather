@@ -1,5 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Input, Button, Flex, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Button,
+  Flex,
+  useToast,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getWeather } from "../utils/getWeather";
 import { WeatherCard, WeatherCardContent } from "./weather_card";
@@ -42,14 +50,17 @@ export const WeatherSection = () => {
     <Box>
       <WeatherCard>
         <Flex>
-          <Input
-            value={location}
-            fontWeight="bold"
-            focusBorderColor="white"
-            onChange={onInputChanged}
-            placeholder="Enter a location"
-            _placeholder={{ color: "inherit" }}
-          />
+          <InputGroup>
+            <InputLeftElement pointerEvents="none">🌎</InputLeftElement>
+            <Input
+              value={location}
+              fontWeight="bold"
+              focusBorderColor="white"
+              onChange={onInputChanged}
+              placeholder="Enter a location"
+              _placeholder={{ color: "inherit" }}
+            />
+          </InputGroup>
 
           <Button ml="2" colorScheme="blue" onClick={onSearch}>
             Search
@@ -57,7 +68,7 @@ export const WeatherSection = () => {
         </Flex>
       </WeatherCard>
 
-      {weather && <WeatherCardContent info={weather} />}
+      <WeatherCardContent info={weather} />
     </Box>
   );
 };

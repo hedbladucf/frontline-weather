@@ -26,18 +26,18 @@ WeatherCard.propTypes = {
 };
 
 const WeatherCardContent = ({ info }) => {
-  const weather = info.weather[0];
+  const weather = info?.weather?.[0];
 
   return (
     <WeatherCard>
       <CardHeader>
         <Heading size="lg">
-          {info.name}, {info.sys.country}
+          {info?.name}, {info?.sys?.country}
           <Text fontSize="small" mt="2">
-            🗺 ({info.coord.lat}, {info.coord.lon})
+            🗺 ({info?.coord?.lat}, {info?.coord?.lon})
           </Text>
           <Text fontSize="small" mt="2">
-            📅 {getLocalTime(info.timezone)}
+            📅 {getLocalTime(info?.timezone ?? 0)}
           </Text>
         </Heading>
       </CardHeader>
@@ -49,15 +49,17 @@ const WeatherCardContent = ({ info }) => {
               Weather
             </Heading>
             <Box display="flex" alignItems="center">
-              <Tooltip label={weather.description}>
+              <Tooltip label={weather?.description}>
                 <Image
                   mt="2"
                   h="8"
-                  src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+                  src={`https://openweathermap.org/img/wn/${
+                    weather?.icon ?? "03d"
+                  }@2x.png`}
                   alt="Weather Icon"
                 />
               </Tooltip>
-              <Text pt="2">{weather.main}</Text>
+              <Text pt="2">{weather?.main}</Text>
             </Box>
           </Box>
 
@@ -65,23 +67,23 @@ const WeatherCardContent = ({ info }) => {
             <Heading size="xs" textTransform="uppercase">
               Temperature
             </Heading>
-            <Text pt="2">Currently {info.main.temp.toFixed(1)}° F</Text>
-            <Text pt="2">Feels like {info.main.feels_like.toFixed(1)}° F</Text>
+            <Text pt="2">Currently {info?.main?.temp.toFixed(1)}° F</Text>
+            <Text pt="2">Feels like {info?.main?.feels_like.toFixed(1)}° F</Text>
           </Box>
 
           <Box>
             <Heading size="xs" textTransform="uppercase">
               Humidity
             </Heading>
-            <Text pt="2">{info.main.humidity}%</Text>
+            <Text pt="2">{info?.main?.humidity}%</Text>
           </Box>
 
           <Box>
             <Heading size="xs" textTransform="uppercase">
               Wind
             </Heading>
-            <Text pt="2">{info.wind.speed} mph</Text>
-            <Text pt="2">{getWindDirection(info.wind.deg)}</Text>
+            <Text pt="2">{info?.wind?.speed} mph</Text>
+            <Text pt="2">{getWindDirection(info?.wind?.deg ?? 0)}</Text>
           </Box>
         </Stack>
       </CardBody>
@@ -90,7 +92,7 @@ const WeatherCardContent = ({ info }) => {
 };
 
 WeatherCardContent.propTypes = {
-  info: PropTypes.object.isRequired,
+  info: PropTypes.object,
 };
 
 export { WeatherCard, WeatherCardContent };
