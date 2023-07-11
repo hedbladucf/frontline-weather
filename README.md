@@ -4,6 +4,11 @@
 
 This is a demo app made to showcase as an intro-to-programming example.
 
+### This project was built using the following tools:
+- [NodeJS](https://nodejs.org)
+- [React](https://react.dev)
+
+## IMPORTANT
 ### This project needs the following environment variables defined.
 
 Info on environment variables:
