@@ -18,7 +18,7 @@ export const WeatherSection = () => {
   const [weather, setWeather] = useState(undefined);
 
   const [location, setLocation] = useState(
-    localStorage.getItem(locationKey) ?? "Orlando"
+    localStorage.getItem(locationKey) ?? "Lake Mary"
   );
 
   const toast = useToast();
@@ -44,6 +44,12 @@ export const WeatherSection = () => {
     localStorage.setItem(locationKey, location);
   };
 
+  const onKeyUpHandler = (e) => {
+    if (e.key === 'Enter') {
+      onSearch();
+    }
+  }
+
   const onInputChanged = (e) => setLocation(e.target.value);
 
   return (
@@ -56,6 +62,7 @@ export const WeatherSection = () => {
               value={location}
               fontWeight="bold"
               focusBorderColor="white"
+              onKeyUp={onKeyUpHandler}
               onChange={onInputChanged}
               placeholder="Enter a location"
               _placeholder={{ color: "inherit" }}
