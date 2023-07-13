@@ -1,4 +1,4 @@
-# Frontline Weeather app
+# Frontline Weather app
 
 ## A demo node/react application that fetches weather by providing a location.
 
